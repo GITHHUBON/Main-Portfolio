@@ -23,7 +23,7 @@ export function Footer() {
           {/* Left */}
           <div className="flex flex-col gap-4">
             <a
-              href="/privacy"
+              href="https://www.freeprivacypolicy.com/live/e2453ac3-e60e-4e15-8ae5-6c30ca965f33"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -32,7 +32,7 @@ export function Footer() {
             </a>
 
             <a
-              href="/terms"
+              href="https://www.termsfeed.com/live/0ec04e37-51ab-4c7c-b2c6-bc5c5dc19a46"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -44,7 +44,7 @@ export function Footer() {
           {/* Center */}
           <div className="flex flex-col gap-4">
             <a
-              href="https://github.com"
+              href="https://github.com/GITHHUBON"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -53,7 +53,7 @@ export function Footer() {
             </a>
 
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/bon-sanchez-489ba532a/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
@@ -62,7 +62,7 @@ export function Footer() {
             </a>
 
             <a
-              href="mailto:bon@aianalytics.dev"
+              href="mailto:github.bon@gmail.com"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               Email

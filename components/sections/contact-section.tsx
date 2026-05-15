@@ -9,8 +9,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "bon@aianalytics.dev",
-    href: "mailto:bon@aianalytics.dev",
+    value: "github.bon@gmail.com",
+    href: "mailto:github.bon@gmail.com",
     description: "Send me an email anytime",
   },
   {
@@ -32,7 +32,7 @@ const contactInfo = [
 const socialMedia = [
   {
     icon: Linkedin,
-    href: "https://linkedin.com",
+    href: "https://www.linkedin.com/in/bon-sanchez-489ba532a/",
     label: "LinkedIn",
     color: "hover:bg-primary/10 hover:border-primary/40 hover:text-primary hover:shadow-lg hover:shadow-primary/5",
   },

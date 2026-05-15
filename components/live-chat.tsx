@@ -23,6 +23,7 @@ interface Message {
 }
 
 export function LiveChat() {
+  const [isMounted, setIsMounted] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [isMinimized, setIsMinimized] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
@@ -40,8 +41,14 @@ export function LiveChat() {
   }
 
   useEffect(() => {
-    scrollToBottom()
-  }, [messages])
+    setIsMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (isMounted) {
+      scrollToBottom()
+    }
+  }, [messages, isMounted])
 
   const handleSend = (text: string) => {
     if (!text.trim()) return
@@ -72,13 +79,13 @@ export function LiveChat() {
       } else if (lowerText.includes("service")) {
         response = "I offer IT Analytics, Business Analytics, Data Development, Web Development, and Application Administration services. I can help you with data-driven solutions and web applications."
       } else if (lowerText.includes("contact")) {
-        response = "You can reach me at:\n\n📧 Email: bon@aianalytics.dev\n📱 Phone: +639210264084\n\nI'm currently available for freelance opportunities and collaborations! Feel free to reach out anytime."
+        response = "You can reach me at:\n\n📧 Email: github.bon@gmail.com\n📱 Phone: +639210264084\n\nI'm currently available for freelance opportunities and collaborations! Feel free to reach out anytime."
       } else if (lowerText.includes("social") || lowerText.includes("facebook") || lowerText.includes("media")) {
         response = "Here are my contact and social media links:"
         isLink = true
         link = "social"
       } else {
-        response = "Thanks for your message! 👋\n\nHere's how to reach me:\n• 📧 Email: bon@aianalytics.dev\n• 📱 Phone: +639210264084\n• 💼 LinkedIn: linkedin.com/in/bon\n• 📱 Facebook: facebook.com/bon.ai\n\nOr click on the quick replies above to learn more about my services!"
+        response = "Thanks for your message! 👋\n\nHere's how to reach me:\n• 📧 Email: github.bon@gmail.com\n• 📱 Phone: +639210264084\n• 💼 LinkedIn: Bon Sanchez\n• 📱 Facebook: Bon Novela\n\nOr click on the quick replies above to learn more about my services!"
       }
 
       const botMessage: Message = {
@@ -102,6 +109,11 @@ export function LiveChat() {
       social: "Show me social media",
     }
     handleSend(messageMap[action] || action)
+  }
+
+  // Don't render anything on the server to prevent hydration mismatch
+  if (!isMounted) {
+    return null
   }
 
   return (
@@ -196,10 +208,10 @@ export function LiveChat() {
                             <p className="mb-2">{message.text}</p>
                             <div className="space-y-1.5">
                               <a
-                                href="mailto:bon@aianalytics.dev"
+                                href="mailto:github.bon@gmail.com"
                                 className="flex items-center gap-2 text-sm hover:underline block p-1.5 rounded-lg hover:bg-white/10 transition-colors"
                               >
-                                📧 bon@aianalytics.dev
+                                📧 github.bon@gmail.com
                               </a>
                               <a
                                 href="tel:+639210264084"
@@ -208,28 +220,28 @@ export function LiveChat() {
                                 📱 +639210264084
                               </a>
                               <a
-                                href="https://www.facebook.com/bon.ai"
+                                href="https://www.facebook.com/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-sm hover:underline block p-1.5 rounded-lg hover:bg-white/10 transition-colors"
                               >
-                                📘 Facebook: /bon.ai
+                                📘 Facebook: Bon Novela
                               </a>
                               <a
-                                href="https://linkedin.com/in/bon"
+                                href="https://www.linkedin.com/in/bon-sanchez-489ba532a/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-sm hover:underline block p-1.5 rounded-lg hover:bg-white/10 transition-colors"
                               >
-                                💼 LinkedIn: /in/bon
+                                💼 LinkedIn: Bon Sanchez
                               </a>
                               <a
-                                href="https://github.com/bon"
+                                href="https://github.com/GITHHUBON"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="flex items-center gap-2 text-sm hover:underline block p-1.5 rounded-lg hover:bg-white/10 transition-colors"
                               >
-                                🐙 GitHub: /bon
+                                🐙 GitHub: AI Bon
                               </a>
                             </div>
                           </div>

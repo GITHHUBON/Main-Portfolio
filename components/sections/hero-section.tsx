@@ -6,8 +6,8 @@ import { useEffect, useState, useRef } from "react"
 import { projects } from "@/lib/data"
 
 const socialLinks = [
-  { href: "https://linkedin.com", icon: Linkedin, label: "LinkedIn" },
-  { href: "https://github.com", icon: Github, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/bon-sanchez-489ba532a/", icon: Linkedin, label: "LinkedIn" },
+  { href: "https://github.com/GITHHUBON", icon: Github, label: "GitHub" },
   { href: "https://facebook.com", icon: Facebook, label: "Facebook" },
   { href: "https://instagram.com", icon: Instagram, label: "Instagram" },
 ]

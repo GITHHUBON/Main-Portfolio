@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "AI Bon" }],
   icons: {
-    icon: "/favicon.ico", // Changed from photo-logo.png to favicon.ico
+    icon: "/photo-logo.png",
     apple: "/favicon.ico",
   },
 };

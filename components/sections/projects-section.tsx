@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { ExternalLink, Github, ChevronDown, ChevronUp, Calendar } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { CustomTrigger } from "@/components/custom-trigger"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -180,30 +181,31 @@ export function ProjectsSection() {
           {/* Filter and View Controls */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             {/* Year Filter Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="gap-2 min-w-[150px] bg-primary/10 border-primary/20 hover:bg-primary/20 hover:border-primary/40 transition-colors">
-                  <Calendar className="h-4 w-4 text-primary" />
-                  <span className="text-primary">{selectedYear}</span>
-                  <ChevronDown className="h-4 w-4 ml-auto text-primary" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="center" className="min-w-[150px] bg-background/95 backdrop-blur-sm border-primary/20">
-                {years.map((year) => (
-                  <DropdownMenuItem
-                    key={year}
-                    onClick={() => handleYearChange(year)}
-                    className={`cursor-pointer transition-colors ${
-                      selectedYear === year 
-                        ? "bg-primary/20 text-primary" 
-                        : "hover:bg-primary/10 hover:text-primary"
-                    }`}
-                  >
-                    {year}
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* Year Filter Dropdown */}
+ <DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <div role="button" tabIndex={0} className="gap-2 min-w-[150px] bg-primary/10 border border-primary/20 hover:bg-primary/20 hover:border-primary/40 transition-colors rounded-md px-4 py-2 inline-flex items-center justify-center cursor-pointer">
+      <Calendar className="h-4 w-4 text-primary" />
+      <span className="text-primary">{selectedYear}</span>
+      <ChevronDown className="h-4 w-4 ml-auto text-primary" />
+    </div>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent align="center" className="min-w-[150px] bg-background/95 backdrop-blur-sm border-primary/20">
+    {years.map((year) => (
+      <DropdownMenuItem
+        key={year}
+        onClick={() => handleYearChange(year)}
+        className={`cursor-pointer transition-colors ${
+          selectedYear === year 
+            ? "bg-primary/20 text-primary" 
+            : "hover:bg-primary/10 hover:text-primary"
+        }`}
+      >
+        {year}
+      </DropdownMenuItem>
+    ))}
+  </DropdownMenuContent>
+ </DropdownMenu>
 
             {/* Show All / Show Less Button */}
             {totalPages > 1 && (

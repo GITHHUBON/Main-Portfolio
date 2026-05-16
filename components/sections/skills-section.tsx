@@ -10,6 +10,7 @@ const skills = [
   { name: "Vue.js", category: "Frontend" },
   { name: "Next.js", category: "Frontend" },
   { name: "HTML/CSS", category: "Frontend" },
+  { name: "Tailwind CSS", category: "Frontend" },
   { name: "SQL (PostgreSQL)", category: "Database" },
   { name: "ETL Pipelines", category: "Data" },
   { name: "API Integration", category: "Backend" },
@@ -22,9 +23,12 @@ const skills = [
   { name: "AppsScript", category: "Tools" },
   { name: "Pandas", category: "Data" },
   { name: "Data Visualization", category: "Analytics" },
+  { name: "ChatGPT", category: "AI Tools" },
+  { name: "DeepSeek", category: "AI Tools" },
+  { name: "Blackbox AI", category: "AI Tools" },
 ]
 
-const categories = ["All", "Programming", "Frontend", "Backend", "Database", "Data", "Analytics", "Tools"]
+const categories = ["All", "Programming", "Frontend", "Backend", "Database", "Data", "Analytics", "Tools", "AI Tools"]
 
 export function SkillsSection() {
   const ref = useRef(null)

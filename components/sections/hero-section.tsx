@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Linkedin, Github, Facebook, Instagram } from "lucide-react"
+import { Linkedin, Github, Facebook, Instagram, Star } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 import { projects } from "@/lib/data"
 
@@ -33,18 +33,32 @@ function AnimatedCounter({ target, duration = 2 }: { target: number; duration?: 
   return <span>{count.toLocaleString()}</span>
 }
 
-// Live Green Analytics Line Component - COMPLETELY REWRITTEN
+// Star Rating Component
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <div className="flex justify-center gap-1">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <Star
+          key={star}
+          className={`h-5 w-5 ${
+            star <= rating
+              ? "fill-yellow-500 text-yellow-500"
+              : "text-muted-foreground"
+          }`}
+        />
+      ))}
+    </div>
+  )
+}
+
+// Live Green Analytics Line Component
 function LiveAnalyticsBackground() {
   const [isClient, setIsClient] = useState(false)
-  const pathRef1 = useRef<SVGPathElement>(null)
-  const pathRef2 = useRef<SVGPathElement>(null)
-  const pathRef3 = useRef<SVGPathElement>(null)
 
   useEffect(() => {
     setIsClient(true)
   }, [])
 
-  // Simple static SVG during SSR and initial mount
   if (!isClient) {
     return (
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -69,7 +83,6 @@ function LiveAnalyticsBackground() {
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {/* Simple CSS-only animated lines */}
       <svg className="absolute w-full h-full opacity-30" preserveAspectRatio="none">
         <defs>
           <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
@@ -87,7 +100,6 @@ function LiveAnalyticsBackground() {
           </filter>
         </defs>
 
-        {/* Line 1 - Sine wave */}
         <motion.path
           d="M0,60 Q100,20 200,60 T400,60 T600,60 T800,60"
           fill="none"
@@ -99,7 +111,6 @@ function LiveAnalyticsBackground() {
           transition={{ duration: 2 }}
         />
 
-        {/* Line 2 - Different wave */}
         <motion.path
           d="M0,40 Q100,80 200,40 T400,40 T600,40 T800,40"
           fill="none"
@@ -111,7 +122,6 @@ function LiveAnalyticsBackground() {
           transition={{ duration: 2.5, delay: 0.5 }}
         />
 
-        {/* Line 3 - Fast moving scanner */}
         <motion.path
           d="M0,30 L200,30 L400,30 L600,30 L800,30"
           fill="none"
@@ -124,7 +134,6 @@ function LiveAnalyticsBackground() {
         />
       </svg>
 
-      {/* Animated particles */}
       <div className="absolute inset-0">
         {[...Array(20)].map((_, i) => {
           const size = Math.random() * 3 + 1
@@ -162,7 +171,6 @@ function LiveAnalyticsBackground() {
         })}
       </div>
 
-      {/* Grid overlay */}
       <svg className="absolute w-full h-full opacity-10" preserveAspectRatio="none">
         {[0, 25, 50, 75, 100].map(y => (
           <line
@@ -190,7 +198,6 @@ function LiveAnalyticsBackground() {
         ))}
       </svg>
 
-      {/* Moving scan line */}
       <motion.div
         className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-green-500 to-transparent"
         animate={{
@@ -205,7 +212,6 @@ function LiveAnalyticsBackground() {
         style={{ filter: "blur(2px)" }}
       />
 
-      {/* Data nodes - blinking dots */}
       {[10, 25, 40, 55, 70, 85].map((x, i) => (
         <motion.div
           key={`node-${i}`}
@@ -300,10 +306,10 @@ export function HeroSection() {
                   <p className="text-sm text-muted-foreground">Dashboards</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-green-500">
-                    <AnimatedCounter target={99} />%
+                  <div className="mb-2">
+                    <StarRating rating={4} />
                   </div>
-                  <p className="text-sm text-muted-foreground">Accuracy</p>
+                  <p className="text-sm text-muted-foreground">Highest Rating</p>
                 </div>
               </div>
             </div>

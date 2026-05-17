@@ -51,7 +51,7 @@ const initialTestimonials: Testimonial[] = [
     rating: 4,
     feedback: "Very fast and professional work. Delivered exactly what we needed ahead of schedule.",
     clientName: "John D.",
-    company: "Marketing Manager",
+    company: "IT",
     service: "IT Analytics",
     date: "2025-10-05",
   },
@@ -60,7 +60,7 @@ const initialTestimonials: Testimonial[] = [
     rating: 3,
     feedback: "The data pipeline solution transformed our business operations. Highly recommended!",
     clientName: "Sarah C.",
-    company: "Data Director",
+    company: "Developer",
     service: "Data Development",
     date: "2025-07-02",
   },
@@ -69,7 +69,7 @@ const initialTestimonials: Testimonial[] = [
     rating: 4,
     feedback: "Great web development work. Very responsive and easy to work with.",
     clientName: "Mike R.",
-    company: "Product Owner",
+    company: "Developer",
     service: "Web Development",
     date: "2026-04-02",
   },
@@ -365,7 +365,7 @@ export function ServicesSection() {
           className="mt-16 pt-8 border-t border-primary/10"
         >
           <div className="text-center mb-10">
-            <h3 className="text-2xl md:text-3xl font-bold mb-3">What Our Clients Say</h3>
+            <h3 className="text-2xl md:text-3xl font-bold mb-3">What People Are Saying</h3>
             <p className="text-muted-foreground">Real feedback from real clients</p>
           </div>
           

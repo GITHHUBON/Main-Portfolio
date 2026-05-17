@@ -259,12 +259,12 @@ export function HeroSection() {
               <span className="block mt-2">
                 Building{" "}
                 <motion.span
-                  className="text-green-500 inline-block"
+                  className="text-violet-500 inline-block"
                   animate={{
                     textShadow: [
-                      "0 0 10px rgba(34, 197, 94, 0.5)",
-                      "0 0 20px rgba(34, 197, 94, 0.8)",
-                      "0 0 10px rgba(34, 197, 94, 0.5)",
+                      "0 0 10px rgba(139, 92, 246, 0.5)",
+                      "0 0 20px rgba(139, 92, 246, 0.8)",
+                      "0 0 10px rgba(139, 92, 246, 0.5)",
                     ],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
@@ -294,23 +294,26 @@ export function HeroSection() {
             <div className="max-w-2xl mx-auto">
               <div className="flex flex-wrap justify-center gap-8 mb-6">
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-green-500">
+                  <div className="inline-block bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
                     <AnimatedCounter target={projects.length} />
                   </div>
                   <p className="text-sm text-muted-foreground">Projects</p>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-green-500">
+                  <div className="inline-block bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
                     <AnimatedCounter target={5} />+
                   </div>
                   <p className="text-sm text-muted-foreground">Dashboards</p>
                 </div>
-                <div className="text-center">
-                  <div className="mb-2">
-                    <StarRating rating={4} />
-                  </div>
-                  <p className="text-sm text-muted-foreground">Highest Rating</p>
-                </div>
+                <div className="flex flex-col items-center">
+  <div className="mb-2">
+    <StarRating rating={4} />
+  </div>
+
+  <p className="text-sm font-medium bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
+    Highest Rating
+  </p>
+</div>
               </div>
             </div>
           </motion.div>

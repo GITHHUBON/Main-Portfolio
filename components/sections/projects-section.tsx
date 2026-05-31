@@ -58,16 +58,25 @@ const projects: Project[] = [
     title: "Monitoring & Analytics - AppSheet",
     description: "Built a comprehensive monitoring and analytics dashboard using AppSheet. Features real-time data visualization, automated reporting, and business intelligence insights.",
     year: 2024,
-    github: "https://github.com",
+    github: "https://github.com/GITHHUBON",
     demo: "https://example.com",
     tags: ["AppSheet", "Google Sheets", "Data Analytics", "Power BI"],
   },
+  {
+    id: 5,
+    title: "Google Sheets ETL Automation",
+    description: "Designed and developed an ETL consolidation system utilizing Google Drive and Google Sheets to automate data extraction, transformation, and loading processes through API integration. Centralized data from multiple sources into a unified reporting platform, improving workflow efficiency, data accuracy, and real-time collaboration across cloud-based environments.",
+    year: 2026,
+    github: "https://github.com/GITHHUBON",
+    demo: "https://example.com",
+    tags: ["JavaScript", "Google Sheets", "Google Drive", "API Integration"],
+  },
 ]
 
-const years = ["All Years", "2025", "2024"]
+const years = ["All Years", "2026","2025", "2024"]
 const ROWS = 2
 const COLUMNS = 3
-const PROJECTS_PER_PAGE = ROWS * COLUMNS // 6 projects
+const PROJECTS_PER_PAGE = ROWS * COLUMNS
 
 export function ProjectsSection() {
   const ref = useRef(null)

@@ -35,6 +35,15 @@ export const projects = [
     demo: "https://example.com",
     tags: ["AppSheet", "Google Sheets", "Data Analytics", "Power BI"],
   },
+  {
+    id: 5,
+    title: "Google Sheets ETL Automation",
+    description: "Designed and developed an ETL consolidation system utilizing Google Drive and Google Sheets to automate data extraction, transformation, and loading processes through API integration. Centralized data from multiple sources into a unified reporting platform, improving workflow efficiency, data accuracy, and real-time collaboration across cloud-based environments.",
+    year: 2026,
+    github: "https://github.com/GITHHUBON",
+    demo: "https://example.com",
+    tags: ["JavaScript", "Google Sheets", "Google Drive", "API Integration"],
+  },
 ]
 
-export const years = ["All Years", "2025", "2024"]
+export const years = ["All Years", "2026", "2025", "2024"]

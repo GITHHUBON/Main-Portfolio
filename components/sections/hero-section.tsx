@@ -301,7 +301,7 @@ export function HeroSection() {
                 </div>
                 <div className="text-center">
                   <div className="inline-block bg-gradient-to-r from-violet-400 to-purple-600 bg-clip-text text-transparent">
-                    <AnimatedCounter target={5} />+
+                    <AnimatedCounter target={3} />+
                   </div>
                   <p className="text-sm text-muted-foreground">Dashboards</p>
                 </div>

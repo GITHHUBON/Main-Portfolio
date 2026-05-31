@@ -3,6 +3,12 @@
 import { motion } from "framer-motion"
 
 export function Footer() {
+  const currentYear = new Date().getFullYear()
+  const startYear = 2025
+  const yearDisplay = currentYear === startYear 
+    ? startYear 
+    : `${startYear} - ${currentYear}`
+
   return (
     <motion.footer
       initial={{ opacity: 0 }}
@@ -63,6 +69,8 @@ export function Footer() {
 
             <a
               href="mailto:github.bon@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
               Email
@@ -95,19 +103,17 @@ export function Footer() {
 
         </motion.div>
 
-        {/* Divider */}
-
-          {/* Copyright */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-center"
-          >
-            <p className="text-xs text-muted-foreground">
-              © 2026 AI Bon · Building AI Solutions
-            </p>
-          </motion.div>
+        {/* Copyright */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="text-center"
+        >
+          <p className="text-xs text-muted-foreground">
+            © {yearDisplay} · Building AI Solutions
+          </p>
+        </motion.div>
       </div>
     </motion.footer>
   )

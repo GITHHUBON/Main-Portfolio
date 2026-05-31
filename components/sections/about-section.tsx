@@ -2,7 +2,6 @@
 
 import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import { useRef } from "react"
-import Image from "next/image"
 import { Briefcase, MapPin, FolderCheck, Award, Lightbulb, Quote } from "lucide-react"
 
 const callouts = [
@@ -23,22 +22,20 @@ const focusAreas = [
 ]
 
 export function AboutSection() {
-  const ref = useRef(null)
   const sectionRef = useRef<HTMLElement>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const ref = useRef(null)
   const isInView = useInView(ref, { once: false, margin: "-100px" })
   
-  // Scroll animations for callouts only - with proper container
+  // Scroll animations for callouts
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
-    container: containerRef
   })
   
-  // Callout animations - moves RIGHT and scales down
-  const calloutX = useTransform(scrollYProgress, [0, 0.5, 1], [0, 30, 50])
-  const calloutScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.95, 0.9])
-  const calloutOpacity = useTransform(scrollYProgress, [0, 0.3, 0.8], [1, 1, 0.7])
+  // Callout animations - moves RIGHT and scales down as user scrolls
+  const calloutX = useTransform(scrollYProgress, [0, 0.5, 1], [0, 20, 40])
+  const calloutScale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.98, 0.95])
+  const calloutOpacity = useTransform(scrollYProgress, [0, 0.3, 0.8], [1, 1, 0.8])
 
   return (
     <section 
@@ -46,7 +43,7 @@ export function AboutSection() {
       ref={sectionRef}
       className="relative py-20 md:py-32 px-4 overflow-hidden"
     >
-      <div ref={containerRef} className="container mx-auto relative">
+      <div className="container mx-auto relative">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 50 }}
@@ -99,7 +96,7 @@ export function AboutSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="relative flex flex-col items-center"
           >
-            {/* Speech Bubble Container */}
+            {/* Speech Bubble Container - Scroll animated like the button in Services */}
             <motion.div 
               className="relative w-full max-w-xs mb-8"
               style={{
@@ -112,10 +109,10 @@ export function AboutSection() {
               {/* Speech Bubble */}
               <div className="relative bg-gradient-to-br from-card to-card/80 backdrop-blur-sm rounded-xl p-3 border border-border shadow-lg">
                 {/* Quote icon */}
-                <Quote className="absolute top-1 left-1 h-2 w-2 text-primary/20" />
-                <Quote className="absolute bottom-1 right-1 h-2 w-2 text-primary/20 rotate-180" />
+                <Quote className="absolute top-2 left-2 h-3 w-3 text-primary/20" />
+                <Quote className="absolute bottom-2 right-2 h-3 w-3 text-primary/20 rotate-180" />
                 
-                {/* Callouts inside speech bubble - Skills section style */}
+                {/* Callouts inside speech bubble */}
                 <div className="flex flex-wrap gap-2 justify-center">
                   {callouts.map((callout, index) => (
                     <motion.div

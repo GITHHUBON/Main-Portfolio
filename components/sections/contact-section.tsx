@@ -29,7 +29,7 @@ const contactInfo = [
 const socialMedia = [
   { icon: Github, href: "https://github.com/GITHHUBON", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/bon-sanchez-489ba532a/", label: "LinkedIn" },
-  { icon: Youtube, href: "https://youtube.com", label: "YouTube" },
+  { icon: Youtube, href: "https://youtube.com/@bonsanchez3231?si=gtKVL4kmRbxO3rzC", label: "YouTube" },
   { 
     icon: () => (
       <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">

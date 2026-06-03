@@ -13,7 +13,8 @@ import {
   Database, 
   Code2, 
   Settings,
-  Send
+  Send,
+  ExternalLink
 } from "lucide-react"
 import { ThemeToggle } from "./theme-toggle"
 import { Button } from "@/components/ui/button"
@@ -24,6 +25,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu"
+import Link from "next/link"
 
 const navLinks = [
   { href: "#home", label: "Home" },
@@ -32,6 +34,40 @@ const navLinks = [
   { href: "#projects", label: "Projects" },
   { href: "#services", label: "Services" },
   { href: "#contact", label: "Contact" },
+]
+
+// Service links for dropdown
+const serviceLinks = [
+  { 
+    label: "IT Analytics", 
+    href: "/services/it-analytics", 
+    icon: BarChart3,
+    description: "Transform data into actionable IT insights"
+  },
+  { 
+    label: "Business Analytics", 
+    href: "/services/business-analytics", 
+    icon: Briefcase,
+    description: "Drive growth with business intelligence"
+  },
+  { 
+    label: "Data Development", 
+    href: "/services/data-development", 
+    icon: Database,
+    description: "Build robust data pipelines"
+  },
+  { 
+    label: "Web Development", 
+    href: "/services/web-development", 
+    icon: Code2,
+    description: "Create modern web applications"
+  },
+  { 
+    label: "Application Administration", 
+    href: "/services/application-administration", 
+    icon: Settings,
+    description: "Expert app management"
+  },
 ]
 
 // Feedback Modal Component
@@ -294,38 +330,43 @@ export function Navbar() {
                           />
                         </button>
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="center" className="w-64 bg-background/95 backdrop-blur-sm border-primary/20 p-2">
+                      <DropdownMenuContent align="center" className="w-80 bg-background/95 backdrop-blur-sm border-primary/20 p-2">
+                        {/* All Services link */}
                         <DropdownMenuItem asChild className="cursor-pointer">
-                          <a href="#services" onClick={(e) => handleNavClick(e as any, "#services")} className="flex items-center gap-2">
-                            <Briefcase className="h-4 w-4 text-primary" />
-                            <span>All Services</span>
+                          <a 
+                            href="#services" 
+                            onClick={(e) => handleNavClick(e as any, "#services")} 
+                            className="flex items-center gap-3 p-2"
+                          >
+                            <Briefcase className="h-5 w-5 text-primary" />
+                            <div className="flex-1">
+                              <div className="font-medium text-foreground">All Services</div>
+                              <div className="text-xs text-muted-foreground">View all our services</div>
+                            </div>
                           </a>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild className="cursor-pointer">
-                          <a href="#services" onClick={(e) => handleNavClick(e as any, "#services")} className="flex items-center gap-2">
-                            <BarChart3 className="h-4 w-4 text-primary" />
-                            <span>IT Analytics</span>
-                          </a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild className="cursor-pointer">
-                          <a href="#services" onClick={(e) => handleNavClick(e as any, "#services")} className="flex items-center gap-2">
-                            <Database className="h-4 w-4 text-primary" />
-                            <span>Data Development</span>
-                          </a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild className="cursor-pointer">
-                          <a href="#services" onClick={(e) => handleNavClick(e as any, "#services")} className="flex items-center gap-2">
-                            <Code2 className="h-4 w-4 text-primary" />
-                            <span>Web Development</span>
-                          </a>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild className="cursor-pointer">
-                          <a href="#services" onClick={(e) => handleNavClick(e as any, "#services")} className="flex items-center gap-2">
-                            <Settings className="h-4 w-4 text-primary" />
-                            <span>Application Admin</span>
-                          </a>
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator className="bg-primary/10" />
+                        
+                        <DropdownMenuSeparator className="bg-primary/10 my-1" />
+                        
+                        {/* Individual services with external link */}
+                        {serviceLinks.map((service) => (
+                          <DropdownMenuItem key={service.label} asChild className="cursor-pointer">
+                            <Link 
+                              href={service.href}
+                              target="_blank"
+                              className="flex items-center gap-3 p-2 group"
+                            >
+                              <service.icon className="h-5 w-5 text-primary" />
+                              <div className="flex-1">
+                                <div className="font-medium text-foreground group-hover:text-primary transition-colors flex items-center gap-1">
+                                  {service.label}
+                                  <ExternalLink className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                </div>
+                                <div className="text-xs text-muted-foreground">{service.description}</div>
+                              </div>
+                            </Link>
+                          </DropdownMenuItem>
+                        ))}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   )
@@ -431,6 +472,28 @@ export function Navbar() {
                       )}
                     </motion.a>
                   ))}
+                  
+                  {/* Services Dropdown in Mobile */}
+                  <div className="py-2 px-4">
+                    <div className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-wider">Services</div>
+                    <div className="space-y-1">
+                      {serviceLinks.map((service) => (
+                        <Link
+                          key={service.label}
+                          href={service.href}
+                          target="_blank"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-primary/10 transition-colors group"
+                        >
+                          <service.icon className="h-4 w-4 text-primary" />
+                          <span className="text-sm text-foreground group-hover:text-primary transition-colors">
+                            {service.label}
+                          </span>
+                          <ExternalLink className="h-3 w-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
                   
                   {/* Mobile Feedback Option */}
                   <button

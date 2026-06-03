@@ -29,6 +29,10 @@ const skills = [
   { name: "Looker Studio", category: "Analytics & Reporting" },
 ]
 
+// Auto-count unique categories
+const uniqueCategories = [...new Set(skills.map(skill => skill.category))]
+const categoriesCount = uniqueCategories.length
+
 // Split skills into two rows
 const midpoint = Math.ceil(skills.length / 2)
 const row1Skills = skills.slice(0, midpoint)
@@ -38,11 +42,22 @@ export function SkillsSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   const [shouldAnimate, setShouldAnimate] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
     if (isInView) {
       setShouldAnimate(true)
     }
+    
+    // Get window width for animation calculation
+    setWindowWidth(window.innerWidth)
+    
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [isInView])
 
   // Duplicate skills 3 times for smoother seamless looping
@@ -59,26 +74,27 @@ export function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Skills</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Skills & Technologies</h2>
           <div className="w-20 h-1 bg-primary mx-auto" />
+          <p className="text-muted-foreground mt-4">{skills.length}+ Technologies and tools I work with</p>
         </motion.div>
 
-        {/* Row 1 - scrolling right to left */}
-        <div className="relative mb-8">
-          {/* Left blur */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none z-10" />
-          {/* Right blur */}
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background via-background/80 to-transparent pointer-events-none z-10" />
+        {/* Row 1 - scrolling right to left (slower) */}
+        <div className="relative mb-10">
+          {/* Left gradient blur */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background via-background/90 to-transparent pointer-events-none z-10" />
+          {/* Right gradient blur */}
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background via-background/90 to-transparent pointer-events-none z-10" />
           
           <div className="overflow-hidden">
             <motion.div
               className="flex gap-4"
               animate={shouldAnimate ? {
-                x: [0, -window.innerWidth * 1.5]
+                x: [0, -windowWidth * 0.8]
               } : {}}
               transition={{
                 x: {
-                  duration: 30,
+                  duration: 45,
                   repeat: Infinity,
                   ease: "linear",
                   repeatType: "loop",
@@ -89,15 +105,19 @@ export function SkillsSection() {
               {duplicatedRow1.map((skill, index) => (
                 <motion.div
                   key={`${skill.name}-row1-${index}`}
-                  whileHover={{ scale: 1.05, y: -5, z: 10, transition: { duration: 0.2 } }}
-                  className="group relative p-4 w-36 bg-primary/10 backdrop-blur-sm rounded-lg border border-primary/20 hover:bg-primary/20 hover:border-primary/40 transition-all cursor-default flex-shrink-0"
+                  whileHover={{ 
+                    scale: 1.08, 
+                    y: -8,
+                    transition: { duration: 0.2 } 
+                  }}
+                  className="group relative p-4 w-36 bg-primary/10 backdrop-blur-sm rounded-xl border border-primary/20 hover:bg-primary/20 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-all cursor-default flex-shrink-0"
                   style={{ backdropFilter: "blur(8px)" }}
                 >
                   <div className="text-center">
-                    <p className="font-medium text-primary group-hover:text-primary transition-colors">
+                    <p className="font-semibold text-primary group-hover:text-primary transition-colors text-sm">
                       {skill.name}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-1">{skill.category}</p>
+                    <p className="text-xs text-muted-foreground mt-1.5">{skill.category}</p>
                   </div>
                 </motion.div>
               ))}
@@ -105,22 +125,22 @@ export function SkillsSection() {
           </div>
         </div>
 
-        {/* Row 2 - scrolling left to right (opposite direction) */}
+        {/* Row 2 - scrolling left to right (opposite direction, slower) */}
         <div className="relative">
-          {/* Left blur */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none z-10" />
-          {/* Right blur */}
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background via-background/80 to-transparent pointer-events-none z-10" />
+          {/* Left gradient blur */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-background via-background/90 to-transparent pointer-events-none z-10" />
+          {/* Right gradient blur */}
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background via-background/90 to-transparent pointer-events-none z-10" />
           
           <div className="overflow-hidden">
             <motion.div
               className="flex gap-4"
               animate={shouldAnimate ? {
-                x: [-window.innerWidth * 1.5, 0]
+                x: [-windowWidth * 0.8, 0]
               } : {}}
               transition={{
                 x: {
-                  duration: 30,
+                  duration: 45,
                   repeat: Infinity,
                   ease: "linear",
                   repeatType: "loop",
@@ -131,15 +151,19 @@ export function SkillsSection() {
               {duplicatedRow2.map((skill, index) => (
                 <motion.div
                   key={`${skill.name}-row2-${index}`}
-                  whileHover={{ scale: 1.05, y: -5, z: 10, transition: { duration: 0.2 } }}
-                  className="group relative p-4 w-36 bg-primary/10 backdrop-blur-sm rounded-lg border border-primary/20 hover:bg-primary/20 hover:border-primary/40 transition-all cursor-default flex-shrink-0"
+                  whileHover={{ 
+                    scale: 1.08, 
+                    y: -8,
+                    transition: { duration: 0.2 } 
+                  }}
+                  className="group relative p-4 w-36 bg-primary/10 backdrop-blur-sm rounded-xl border border-primary/20 hover:bg-primary/20 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 transition-all cursor-default flex-shrink-0"
                   style={{ backdropFilter: "blur(8px)" }}
                 >
                   <div className="text-center">
-                    <p className="font-medium text-primary group-hover:text-primary transition-colors">
+                    <p className="font-semibold text-primary group-hover:text-primary transition-colors text-sm">
                       {skill.name}
                     </p>
-                    <p className="text-xs text-muted-foreground mt-1">{skill.category}</p>
+                    <p className="text-xs text-muted-foreground mt-1.5">{skill.category}</p>
                   </div>
                 </motion.div>
               ))}
@@ -147,14 +171,30 @@ export function SkillsSection() {
           </div>
         </div>
 
-        {/* Scroll hint */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 0.6 } : {}}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="text-center text-sm text-muted-foreground mt-8"
+        {/* Stats section - Auto-counted */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.5 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto mt-16"
         >
-        </motion.p>
+          <div className="text-center p-4 bg-primary/5 rounded-lg border border-primary/10">
+            <div className="text-2xl font-bold text-primary">{skills.length}+</div>
+            <div className="text-xs text-muted-foreground mt-1">Technologies</div>
+          </div>
+          <div className="text-center p-4 bg-primary/5 rounded-lg border border-primary/10">
+            <div className="text-2xl font-bold text-primary">{categoriesCount}+</div>
+            <div className="text-xs text-muted-foreground mt-1">Categories</div>
+          </div>
+          <div className="text-center p-4 bg-primary/5 rounded-lg border border-primary/10">
+            <div className="text-2xl font-bold text-primary">2+</div>
+            <div className="text-xs text-muted-foreground mt-1">Years Experience</div>
+          </div>
+          <div className="text-center p-4 bg-primary/5 rounded-lg border border-primary/10">
+            <div className="text-2xl font-bold text-primary">5+</div>
+            <div className="text-xs text-muted-foreground mt-1">Projects Completed</div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
